@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Hey Bestie 🩵</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0; min-height:100vh; font-family:system-ui,-apple-system,Segoe UI,sans-serif;
+  background:linear-gradient(145deg,#dff7ff,#eef1ff 45%,#ffe8f3);
+  color:#20233a; overflow-x:hidden;
+}
+.wrap{max-width:520px;margin:auto;padding:24px 16px 45px}
+.card{
+  background:rgba(255,255,255,.72); backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,.8); border-radius:28px;
+  padding:22px; margin:14px 0; box-shadow:0 15px 45px rgba(60,70,120,.15);
+}
+h1{font-size:32px;margin:4px 0 6px;text-align:center}
+.sub{text-align:center;color:#666b82;margin:0 0 18px}
+.message{font-size:18px;line-height:1.6;text-align:center}
+button{
+  width:100%;border:0;border-radius:18px;padding:14px;margin-top:10px;
+  font-size:16px;font-weight:700;cursor:pointer;background:#fff;
+  box-shadow:0 7px 20px rgba(70,80,120,.12); color:#30344d;
+}
+button.primary{background:linear-gradient(135deg,#75d8ff,#9b9cff);color:white}
+button:active{transform:scale(.98)}
+.hidden{display:none}
+.photo{
+  width:100%;display:block;border-radius:22px;object-fit:cover;
+  max-height:620px;box-shadow:0 12px 30px rgba(0,0,0,.12)
+}
+.upload{
+  border:2px dashed #9aa7d8;border-radius:20px;padding:20px;text-align:center;
+  color:#646b86;background:rgba(255,255,255,.45)
+}
+input{display:none}
+label{
+  display:block;background:#fff;border-radius:16px;padding:13px;font-weight:700;
+  margin-top:12px;cursor:pointer;box-shadow:0 6px 18px rgba(60,70,120,.1)
+}
+.final{
+  text-align:center;padding:28px 10px 10px
+}
+.miss{font-size:42px;font-weight:900;margin:6px 0;background:linear-gradient(90deg,#6d7cff,#ef79a8);
+-webkit-background-clip:text;color:transparent}
+.small{color:#73778b;font-size:14px}
+.heart{position:fixed;bottom:-30px;font-size:22px;animation:float 5s linear forwards;pointer-events:none}
+@keyframes float{to{transform:translateY(-110vh) rotate(25deg);opacity:0}}
+.shake{animation:shake .45s}
+@keyframes shake{25%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}75%{transform:rotate(-1deg)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <h1>Hey Bestie 🩵</h1>
+    <p class="sub">Sanda irundhaalum… pesama irukka mudiyuma? 🫂</p>
+    <div class="message" id="msg">
+      <b>Plzz pesu da…</b><br>
+      Ennaala mudinja alavukku unna smile panna vechiduven. ✨
+    </div>
+    <button class="primary" onclick="nextMsg()">Oru vaati smile pannunga 😊</button>
+    <button onclick="sendLove()">Pesalama? 🫂</button>
+  </div>
+
+  <div class="card">
+    <img class="photo" src="37839.jpg" alt="Bestie memory">
+    <p class="small" style="text-align:center;margin:12px 0 0">Indha smile mattum pothum… 🩵</p>
+  </div>
+
+  <div class="card">
+    <div class="upload">
+      <b>Last photo attach pannunga 📸</b>
+      <p class="small">Neenga select panra photo inga last memory-aa varum.</p>
+      <label for="photoInput">📷 Choose your photo</label>
+      <input id="photoInput" type="file" accept="image/*">
+    </div>
+    <div id="uploadedBox" class="hidden" style="margin-top:16px">
+      <img id="uploadedPhoto" class="photo" alt="Your final photo">
+    </div>
+  </div>
+
+  <div class="card final" id="finalCard">
+    <div style="font-size:48px">🩵🫂✨</div>
+    <div class="miss">Miss You</div>
+    <div class="message">
+      Sanda poidattum…<br>
+      Pesama irukradhu mattum vendam. 🥺<br>
+      <b>Oru smile… apram pesu. 🩵</b>
+    </div>
+  </div>
+</div>
+
+<script>
+const messages=[
+  "<b>Plzz pesu da…</b><br>Ennaala mudinja alavukku unna smile panna vechiduven. ✨",
+  "Sanda-ku naan ready… 😌<br>Aana silent treatment-ku naan ready illa! 🥺🩵",
+  "Nee smile pannina podhum…<br>En mood-um automatic-aa sari aagidum. 😊",
+  "<b>Seri… kovam irukkattum.</b><br>Aana konjam pesu. Namma bond romba precious. 🫂",
+  "Last request… <b>oru chinna smile</b> pannitu pesu da. 🩵✨"
+];
+let i=0;
+function nextMsg(){
+  i=(i+1)%messages.length;
+  document.getElementById('msg').innerHTML=messages[i];
+  document.querySelector('.card').classList.remove('shake');
+  void document.querySelector('.card').offsetWidth;
+  document.querySelector('.card').classList.add('shake');
+  hearts(5);
+}
+function sendLove(){
+  document.getElementById('msg').innerHTML="<b>Come back bestie 🫂🩵</b><br>Namma sanda vida namma friendship perusu. ✨";
+  hearts(12);
+}
+function hearts(n){
+  for(let j=0;j<n;j++){
+    setTimeout(()=>{
+      const e=document.createElement('div');
+      e.className='heart'; e.textContent=['🩵','✨','🫂','💙'][Math.floor(Math.random()*4)];
+      e.style.left=(5+Math.random()*90)+'vw';
+      e.style.animationDuration=(3+Math.random()*3)+'s';
+      document.body.appendChild(e);
+      setTimeout(()=>e.remove(),6500);
+    },j*120);
+  }
+}
+document.getElementById('photoInput').addEventListener('change',function(e){
+  const file=e.target.files[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    document.getElementById('uploadedPhoto').src=ev.target.result;
+    document.getElementById('uploadedBox').classList.remove('hidden');
+    document.getElementById('finalCard').scrollIntoView({behavior:'smooth',block:'center'});
+    hearts(15);
+  };
+  reader.readAsDataURL(file);
+});
+</script>
+</body>
+</html>
